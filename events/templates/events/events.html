@@ -6,11 +6,40 @@
     <head>
         <link rel="stylesheet" href= "{% static 'events/events.css'%}">
     </head>
-    <body>
-            <h3>Interviews</h3>
-            <h3>Social</h3>
-            <h3>Networking</h3>
-    </body>
+<body>
+    <div class= "all-events">
+        <div id="interviews" class= "single-category">
+            <h1>Interviews</h1>
+            {% for item in interviews %}
+            <div class= "single-event">
+                <h2>{{item.company}} - <span style="font-size: 20px">{{item.location}}</span></h2>
+                <br>
+                <h6>From: {{item.start_time}}</h6>
+                <h6>To: {{item.end_time}}</h6>
+                <br>
+                <h6>With 
+                    {% for p in item.people.all %}
+                        <li style="margin-left:5%;">{{p}}</li>
+                    {% endfor %}
+                </h6>
+            </div>
+            {% endfor %}
+        </div>
+        <div class= "single-category" id="social">
+            <h1>Social</h1>
+        </div>
+        <div class= "single-category" id="networking">
+            <h1>Networking</h1>
+            {% for item in networking %}
+                <h2>{{item.company}}</h2>
+                <h4>{{item.start_time}}</h4>
+                <h4>{{item.end_time}}</h4>
+                <h4>{{item.location}}</h4>
+                <h4>With {{item.Person}}</h4>
+            {% endfor %}
+        </div>
+    </div>
+</body>
     
 
 </html>
