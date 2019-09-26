@@ -21,14 +21,14 @@ class Interview(models.Model):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     people = models.ManyToManyField(Person)
-
+    notes = models.TextField(blank=True, null=True)
     def __str__(self):
         return "{0} at {1}".format(self.company, self.start_time)
 
 class Social(models.Model):
     name = models.CharField(max_length=50)
     location = models.CharField(max_length=50)
-    details = models.TextField()
+    details = models.TextField(blank=True, null=True)
     start_time = models.DateTimeField(auto_now_add=True, blank=True)
     end_time = models.DateTimeField(auto_now_add=True, blank=True)
 

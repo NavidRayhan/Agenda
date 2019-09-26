@@ -9,35 +9,34 @@
 <body>
     <div class= "all-events">
         <div id="interviews" class= "single-category">
-            <h1>Interviews</h1>
+            <h1 class = "title">Interviews</h1>
             {% for item in interviews %}
             <div class= "single-event">
-                <h2>{{item.company}} - <span style="font-size: 20px">{{item.location}}</span></h2>
-                <br>
-                <h6>From: {{item.start_time}}</h6>
-                <h6>To: {{item.end_time}}</h6>
-                <br>
-                <h6>With 
+                <h2>{{item.company}}<br> <span style="font-size: 18px">{{item.location}}</span></h2>
+                <h6>From: {{item.start_time}}  <br>To: {{item.end_time}}</h6>
+                <h3>With 
                     {% for p in item.people.all %}
                         <li style="margin-left:5%;">{{p}}</li>
                     {% endfor %}
-                </h6>
+                </h3>
+                <h3>Notes:
+                    {{item.notes}}
+                </h3>
+                
             </div>
             {% endfor %}
         </div>
         <div class= "single-category" id="social">
-            <h1>Social</h1>
-        </div>
-        <div class= "single-category" id="networking">
-            <h1>Networking</h1>
-            {% for item in networking %}
-                <h2>{{item.company}}</h2>
-                <h4>{{item.start_time}}</h4>
-                <h4>{{item.end_time}}</h4>
-                <h4>{{item.location}}</h4>
-                <h4>With {{item.Person}}</h4>
+            <h1 class = "title">Social/Networking</h1>
+            {% for item in social %}
+            <div class= "single-event">
+                <h2>{{item.name}} <br><span style="font-size: 20px">{{item.location}}</span></h2> 
+                <h6>From: {{item.start_time}}<br>To: {{item.end_time}}</h6>    
+                <h3>{{item.details}}</h3>
+            </div>
             {% endfor %}
         </div>
+
     </div>
 </body>
     
