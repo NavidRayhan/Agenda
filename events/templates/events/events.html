@@ -2,6 +2,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <html>
     <head>
         <link rel="stylesheet" href= "{% static 'events/events.css'%}">
@@ -9,11 +10,25 @@
 <body>
     <div class= "all-events">
         <div id="interviews" class= "single-category">
-            <h1 class = "title">Interviews</h1>
-            {% for item in interviews %}
+            <h1 class = "title">Interviews
+                <button id="add" type="button" class="btn btn-primary" data-toggle="modal" 
+                data-target="#add_interview" data-whatever="@getbootstrap">
+                <i class="fas fa-plus"></i></button>
+            </h1>
+        {% for item in interviews %}
             <div class= "single-event">
-                <h2>{{item.company}}<br> <span style="font-size: 18px">{{item.location}}</span></h2>
-                <h6>From: {{item.start_time}}  <br>To: {{item.end_time}}</h6>
+                <button id="delete" type="button" class="btn btn-primary" data-toggle="modal" 
+                    data-target="#exampleModal" data-whatever="@getbootstrap">
+                    <i class="fas fa-trash"></i>
+                </button>
+                <h2>
+                    {{item.company}}
+                    <br> <span style="font-size: 18px">{{item.location}}</span>
+                </h2>
+                <h6>
+                    From: &nbsp;{{item.start_time|date:"m-d-Y h:i A"}}  
+                    <br>To: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.end_time|date:"m-d-Y h:i A"}}
+                </h6>
                 <h3>With 
                     {% for p in item.people.all %}
                         <li style="margin-left:5%;">{{p}}</li>
@@ -22,16 +37,20 @@
                 <h3>Notes:
                     {{item.notes}}
                 </h3>
-                
             </div>
             {% endfor %}
         </div>
+        
         <div class= "single-category" id="social">
             <h1 class = "title">Social/Networking</h1>
             {% for item in social %}
             <div class= "single-event">
+                <button id="delete" type="button" class="btn btn-primary" data-toggle="modal" 
+                    data-target="#exampleModal" data-whatever="@getbootstrap">
+                    <i class="fas fa-trash"></i>
+                </button>
                 <h2>{{item.name}} <br><span style="font-size: 20px">{{item.location}}</span></h2> 
-                <h6>From: {{item.start_time}}<br>To: {{item.end_time}}</h6>    
+                <h6>From: {{item.start_time|date:"m-d-Y h:i A"}}<br>To: &nbsp;&nbsp;&nbsp;&nbsp;{{item.end_time|date:"m-d-Y h:i A"}}</h6>    
                 <h3>{{item.details}}</h3>
             </div>
             {% endfor %}
@@ -40,6 +59,29 @@
     </div>
 </body>
     
-
+<div class="modal fade" id="add_interview" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class= "single-event">
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        <br>
+                        Company <input type="text" name="company">
+                        Location <input type="text" name="location">
+                        Start <input placeholder="[YYYY-MM-DD hh:mm:ss]" type="datetime" name="start_time">
+                        End  <input placeholder="[YYYY-MM-DD hh:mm:ss]" type="datetime" name="end_time">
+                        People<input type="text" name="people">
+                        Notes<input type="text" name="notes" style="padding-bottom: 30px">
+                </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" value="Submit" class="btn btn-primary">Send message</button>  
+            </div>
+                    </form>
+        </div>
+    </div>
+</div>
 </html>
 {% endblock %}
