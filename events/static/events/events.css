@@ -1,5 +1,5 @@
 body{
-    background-color:rgb(30, 33, 36); 
+    background-color:rgb(216, 223, 231); 
     font-family: 'Arial'
 }
 .all-events {
@@ -28,8 +28,45 @@ body{
     margin-top:20px;
     margin-bottom: -70px;
 }
+
+@media(max-width: 576px){
+    .single-category {
+        width: 94%;
+        margin-bottom: 10px;
+    }
+    .all-events {
+        display: flex;
+        flex-direction: column;
+        margin-left: -3.5px;
+    }
+    .title{
+        font-size: 30px;
+    }
+    .single-event h1,h2,h3,h4,h5,h6,a,li{
+        padding-left: 1%;
+        font-size:12px;
+    }
+    #notes {
+        font-size: 13px
+    }
+    #delete {
+        margin: -10px;
+    }
+}
+@media(max-width: 770px){
+    .title{
+        font-size: 30px;
+    }
+    .single-category .single-event button{
+        margin-left:-10px;
+    }
+    .single-event h1,h2,h3,h4,h5,h6,a,li{
+        padding-left: 1%;
+        font-size:12px;
+    }
+}
 #interviews {
-    background-color:black;
+    background-color:rgb(188, 198, 204);
     color: black;
 }
 #add {
@@ -58,27 +95,46 @@ body{
     margin:15px;
     border: 1px solid white;
     color:white;
+    padding-top: 20px;
+}
+.single-event:hover {
+    transform: scale(1.01);
+    background-color: rgb(82, 91, 167);
 }
     
 .single-event h3,h4,h5,h6,a,li{
-    margin-left: 5%
+    margin-left: 1%;
 }
 .single-event h6 {
-    font-size: 14px;
-    
+    font-size: 14px;    
+    margin-top:22px;
 }
 .single-event h3{
-    padding-top:15px;
-    padding-bottom:10px;    
+    padding-bottom:3px;    
     font-size: 16px;
     margin-top: -10px;
+}
+.single-event h4{
+    padding-top:20px;
+    padding-bottom:10px;    
+    font-size: 16px;
+    margin-top: -40px;
+    margin-right: 4px;
+}
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-bottom: 0.5px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
 }
 
 .single-event h2 {
     font-size: 39px;
     margin-left: 1%;
-    margin-top: -4%;
-    margin-bottom:4%;
+    margin-top: -5%;
+    margin-bottom: -5%;
 }
 
 .single-event form input {
@@ -101,4 +157,3 @@ body{
 .modal-footer {
     border-top: 0 none;
 }
-

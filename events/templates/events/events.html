@@ -18,23 +18,25 @@
         {% for item in interviews %}
             <div class= "single-event">
                 <button id="delete" type="button" class="btn btn-primary" data-toggle="modal" 
-                    data-target="#exampleModal" data-whatever="@getbootstrap">
-                    <i class="fas fa-trash"></i>
+                    data-target="#delete_interview" data-whatever="@getbootstrap">
+                    <i style="margin-top: -20px;"class="fas fa-trash"></i>
                 </button>
                 <h2>
                     {{item.company}}
                     <br> <span style="font-size: 18px">{{item.location}}</span>
                 </h2>
                 <h6>
-                    From: &nbsp;{{item.start_time|date:"m-d-Y h:i A"}}  
-                    <br>To: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.end_time|date:"m-d-Y h:i A"}}
+                    {{item.start_time|date:"m-d-Y h:i A"}} - {{item.end_time|date:"h:i A"}}
                 </h6>
-                <h3>With 
+                {% if item.people.all %}
+                <h4><br>With 
                     {% for p in item.people.all %}
                         <li style="margin-left:5%;">{{p}}</li>
                     {% endfor %}
-                </h3>
-                <h3>Notes:
+                {% endif %}
+                </h4>
+                <hr/>
+                <h3 id='notes'>Notes:
                     {{item.notes}}
                 </h3>
             </div>
@@ -46,12 +48,13 @@
             {% for item in social %}
             <div class= "single-event">
                 <button id="delete" type="button" class="btn btn-primary" data-toggle="modal" 
-                    data-target="#exampleModal" data-whatever="@getbootstrap">
-                    <i class="fas fa-trash"></i>
+                    data-target="#delete_interview" data-whatever="@getbootstrap">
+                    <i style="margin-top: -20px;"class="fas fa-trash"></i>
                 </button>
                 <h2>{{item.name}} <br><span style="font-size: 20px">{{item.location}}</span></h2> 
                 <h6>From: {{item.start_time|date:"m-d-Y h:i A"}}<br>To: &nbsp;&nbsp;&nbsp;&nbsp;{{item.end_time|date:"m-d-Y h:i A"}}</h6>    
-                <h3>{{item.details}}</h3>
+                <hr/>
+                <h3 id='notes'>{{item.details}}</h3>
             </div>
             {% endfor %}
         </div>
@@ -77,11 +80,27 @@
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" value="Submit" class="btn btn-primary">Send message</button>  
+            <button type="submit" value="Submit" class="btn btn-primary">Add Item</button>  
             </div>
                     </form>
         </div>
     </div>
 </div>
+<div class="modal fade" id="delete_interview" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                        <form method="delete" action="">
+                            {% csrf_token %}
+                            Are you sure you want to delete ?
+                            
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Yes</button>
+            </form>
+                <button type="submit" value="Submit" class="btn btn-primary">No</button>  
+                </div>
+
+            </div>
+        </div>
+    </div>
 </html>
 {% endblock %}
