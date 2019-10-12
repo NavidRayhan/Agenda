@@ -24,6 +24,6 @@ urlpatterns = [
     path('events/', include('events.urls')),
     #path('', include('Calendar.urls')),
     #path('', include('Classes.urls')),
-    #path('', include('Tasks.urls'))
+    path('tasks/', include('Tasks.urls'))
 ]
 

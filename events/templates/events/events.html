@@ -2,11 +2,13 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<script src="https://kit.fontawesome.com/a076d05399.js"></script>
-<html>
-    <head>
-        <link rel="stylesheet" href= "{% static 'events/events.css'%}">
-    </head>
+<head>
+    <link rel="stylesheet" href= "{% static 'events/events.css'%}">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{% static 'events/main.js' %}" type="text/javascript"></script>    
+    
+</head>
 <body>
     <div class= "all-events">
         <div id="interviews" class= "single-category">
@@ -82,25 +84,35 @@
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="submit" value="Submit" class="btn btn-primary">Add Item</button>  
             </div>
-                    </form>
+                </form>
         </div>
     </div>
 </div>
 <div class="modal fade" id="delete_interview" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                        <form method="delete" action="">
-                            {% csrf_token %}
-                            Are you sure you want to delete ?
-                            
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Yes</button>
-            </form>
-                <button type="submit" value="Submit" class="btn btn-primary">No</button>  
-                </div>
-
+                <form method="post" action="">
+                    {% csrf_token %}
+                    Are you sure you want to delete ?            
+                    Company
+                    <select name="company">
+                            {% for item in interviews %}
+                                <option>{{item.company}}</option>
+                            {% endfor %}
+                    </select>
+                    Start Time 
+                    <select name="start_time">
+                            {% for item in interviews %}
+                                <option>{{ item.start_time|date:"Y-m-d G:i"  }}</option>
+                            {% endfor %}
+                    </select>
+                    <div class="modal-footer">
+                        <button type="submit" value="Submit" class="btn btn-primary">Yes</button>  
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    </div>
+                </form>
             </div>
         </div>
-    </div>
+    </div>  
 </html>
 {% endblock %}

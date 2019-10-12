@@ -1,0 +1,28 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<html>
+    <head>
+        <link rel="stylesheet" href= "{% static 'Tasks/tasks.css'%}">
+    </head>
+<body>
+    <div class="main-container">
+        {% for item in coding_challenges %}
+            <div class="task-item" id="coding-challenge">
+                <h1>{{item.company}}</h1>
+                <h5>Due by: {{item.due_by}}</h5>
+                <h4><hr/>{{item.notes}}</h4>
+            </div>
+        {% endfor %}
+        {% for item in assignments %}
+        <div class="task-item" id="coding-challenge">
+            <h1>{{item.name}}</h1>
+            <h5>Due by: {{item.due_by}}</h5>
+            <h4><hr/>{{item.notes}}</h4>
+        </div>
+    {% endfor %}
+    </div>
+</body>
+{% endblock %}

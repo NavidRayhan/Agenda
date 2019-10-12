@@ -1,13 +1,15 @@
 body{
     background-color:rgb(216, 223, 231); 
-    font-family: 'Arial'
+    font-family: 'Arial';
 }
+
 .all-events {
     width: 96%;
     display:inline-flex;
     font-family: "Trebuchet MS";
     margin-left:4%;
-}
+}   
+
 .title{
     width:103%;
     background-color:rgb(27, 7, 116);
@@ -96,6 +98,8 @@ body{
     border: 1px solid white;
     color:white;
     padding-top: 20px;
+    opacity:1;
+    transition: 2000ms opacity;
 }
 .single-event:hover {
     transform: scale(1.01);
@@ -118,14 +122,14 @@ body{
     padding-top:20px;
     padding-bottom:10px;    
     font-size: 16px;
-    margin-top: -40px;
+    margin-top: -4px;
     margin-right: 4px;
 }
 hr {
     display: block;
-    height: 1px;
+    height: 0px;
     border: 0;
-    border-bottom: 0.5px solid #ccc;
+    border-bottom: 2.2px solid white;
     margin: 1em 0;
     padding: 0;
 }

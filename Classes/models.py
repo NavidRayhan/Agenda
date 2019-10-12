@@ -19,5 +19,7 @@ class Course(models.Model):
     midterm2 = models.DateTimeField(blank=True,null=True)
     final_exam = models.DateTimeField(blank=True,null=True)
 
+    
+
 
     
