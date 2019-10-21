@@ -22,7 +22,7 @@ app_name = "agenda"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('events/', include('events.urls')),
-    #path('', include('Calendar.urls')),
+    path('', include('Calendar.urls')),
     #path('', include('Classes.urls')),
     path('tasks/', include('Tasks.urls'))
 ]

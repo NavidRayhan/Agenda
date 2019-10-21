@@ -1,33 +1,54 @@
 body{
     font-family: 'Trebuchet MS'
 }
+html, body {
+    margin: 0;
+    padding: 0;
+}   
 .main-container {
-    width:100%;
+    width:98%;
     display:flex;
     overflow:hidden;
     flex-wrap: wrap;
-    margin-right:auto;
-    margin-left:auto;
-    font-family: 'Trebuchet MS'
+    font-family: 'Trebuchet MS';
+    margin-left: 1.5%;
+}
+i{
+    color:white;
+    font-size:20px;
+    padding:10px;
 }
 
+button{
+    background-color:rgb(29, 51, 31);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color:white;
+    margin-left: 1.5%;
+}
+form input, form select {
+    width: 100%;
+    border: 2px solid black;
+    background-color:rgb(230, 244, 248);
+    font-family: 'Trebuchet MS';
+    padding: 2px;
+}
 .task-item {
-    background-color:rgb(206, 161, 161);
-    width:24%;
+    width:32%;
     margin: 0.25%;
     padding:3px;
     border: 4px solid black;
     font-weight: 100;
 }
-.task-item h1, h4, h5{
+.task-item h1, h4, h5, h6{
     margin-top:2px;
     margin-bottom:2px;
     font-weight: bolder;
-    color:black;
+    color:white;
 }
-
-#coding-challenge{
-    background-color: rgb(183, 226, 212);
+h6{
+    text-align:right;
+    margin-bottom:-2px;
 }
 h4{
     font-size: 14px;
@@ -36,7 +57,29 @@ hr {
     display: block;
     height: 1px;
     border: 0;
-    border-bottom: 2.5px solid black;
+    border-bottom: 2.5px solid white;
     margin: 0.6em 0;
     padding: 0;
+}
+
+
+@media(max-width:500px){
+    .task-item{
+        width: 100%; 
+        margin-bottom :7px;
+    }
+
+    .main-container{
+        width:100%;
+        margin-left:0 ;
+    }
+}
+
+#delete_task, #addtask{
+    font-family: Arial;
+    font-size: 18px;
+}
+
+#delete_task form, #addtask form{
+    padding:10px;
 }

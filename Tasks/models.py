@@ -17,7 +17,6 @@ class CodingChallenge(models.Model):
     company = models.CharField(max_length=50)
     due_by = models.DateTimeField()
     completed_status = models.BooleanField(default=False)
-    allowed_time = models.TimeField()
     notes = models.TextField()
 
     def __str__(self):

@@ -12,7 +12,7 @@ body{
 
 .title{
     width:103%;
-    background-color:rgb(27, 7, 116);
+    background-color:rgb(29, 51, 31);
     margin-left: -6px;
     margin-top:-10px;
     color:white;
@@ -29,6 +29,8 @@ body{
     margin-left:20px;
     margin-top:20px;
     margin-bottom: -70px;
+    background-color:rgb(188, 198, 204);
+    color: black;
 }
 
 @media(max-width: 576px){
@@ -51,9 +53,6 @@ body{
     #notes {
         font-size: 13px
     }
-    #delete {
-        margin: -10px;
-    }
 }
 @media(max-width: 770px){
     .title{
@@ -67,43 +66,19 @@ body{
         font-size:12px;
     }
 }
-#interviews {
-    background-color:rgb(188, 198, 204);
-    color: black;
-}
-#add {
-    padding: 10px; 
-    color:black; 
-    background-color:white; 
-    border:none; 
-}
-#delete{
-    position: relative; 
-    left:95%; 
-    padding:0px; 
-    margin-top:8px;
-    font-size: 20px;
-    border:none;
-}
-#social{
-    background-color: rgb(0, 0, 0);
-    color: black;
-}
+
 .single-category h1 {
     text-align: center;
+    
 }
 .single-event {
-    background-color:rgb(27, 7, 116);
+    background-color:rgb(29, 51, 31);
     margin:15px;
     border: 1px solid white;
     color:white;
     padding-top: 20px;
-    opacity:1;
+    opacity:0;
     transition: 2000ms opacity;
-}
-.single-event:hover {
-    transform: scale(1.01);
-    background-color: rgb(82, 91, 167);
 }
     
 .single-event h3,h4,h5,h6,a,li{
@@ -155,9 +130,32 @@ hr {
     padding-bottom:2%;
 }
 
-.modal-content{
-    background-color: rgb(201, 230, 218);
-}
 .modal-footer {
     border-top: 0 none;
+}
+
+.all-events button {
+    color:black;
+    background-color: white;
+    text-decoration: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin:0px;
+}
+
+#delete_interview, #delete_networking{
+    font-family: Arial;
+    font-size: 18px;
+}
+
+#delete_interview form, #delete_networking form{
+    padding:10px;
+}
+
+form input, form select {
+    width: 100%;
+    border: 2px solid black;
+    background-color:rgb(230, 244, 248);
+    font-family: 'Trebuchet MS';
+    padding: 2px;
 }
