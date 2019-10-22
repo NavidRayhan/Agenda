@@ -2,7 +2,7 @@ class TaskObject:
     def __init__(self, model, task_type, color=None ):
         self.model = model
         self.task_type = task_type
-        task_types = {'Exam': 'red', 'Assignment': 'rgb(80, 5, 5)', 'Coding Challenge': '#590c47'}
+        task_types = {'Other': 'black', 'Exam': 'red', 'Assignment': 'rgb(80, 5, 5)', 'Coding Challenge': '#590c47'}
         self.color = task_types[task_type]
 
 def mergeSort(arr): 
