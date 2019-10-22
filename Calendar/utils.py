@@ -83,7 +83,7 @@ class Calendar(HTMLCalendar):
         for i in networking:
             calendar_events.append(CalendarObject(model=i, color='rgb(14, 9, 58)'))
         for i in tasks:
-            task_types = {'Exam': 'red', 'Assignment': 'rgb(80, 5, 5)', 'Coding Challenge': '#590c47'}
+            task_types = {'Other':'black', 'Exam': 'red', 'Assignment': 'rgb(80, 5, 5)', 'Coding Challenge': '#590c47'}
             calendar_events.append(CalendarObject(model=i, color=task_types[i.task_type]))
 
         cal = f'<table border="0" cellpadding="0" cellspacing="0" class="calendar">\n'
