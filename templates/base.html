@@ -21,7 +21,17 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="#">Classes<span class="sr-only">(current)</span></a>
                     </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item active">
+                            <a class="nav-link" href="#">Logout,{{user}}<span class="sr-only">(current)</span></a>
                     </li>
+                    {% else %}
+                    <li class="nav-item active">
+                            <a class="nav-link" href="#">Login/Register<span class="sr-only">(current)</span></a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>

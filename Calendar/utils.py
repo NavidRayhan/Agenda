@@ -4,17 +4,18 @@ from Tasks.models import *
 from events.models import *
 from itertools import chain
 
-
 class CalendarObject:
     def __init__(self,model, color):
         self.model = model
         self.color = color
 
 class Calendar(HTMLCalendar):
-    def __init__(self, year=None, month=None):
-    	self.year = year
-    	self.month = month
-    	super(Calendar, self).__init__()
+    def __init__(self, user,year=None, month=None):
+        self.year = year
+        self.user = user
+        self.month = month
+        
+        super(Calendar, self).__init__()
 
 	# formats a day as a td
 	# filter events by day
@@ -64,12 +65,23 @@ class Calendar(HTMLCalendar):
 	# formats a month as a table
 	# filter events by year and month
     def formatmonth(self, withyear=True):
+        if self.user.id == None:
+            self.user.id = 1 
+        coding_challenges = CodingChallenge.objects.filter(due_by__year=self.year, 
+        due_by__month=self.month, user__id = self.user.id)
         
-        coding_challenges = CodingChallenge.objects.filter(due_by__year=self.year, due_by__month=self.month)
-        networking = Networking.objects.filter(start_time__year=self.year, start_time__month =self.month)
-        interviews = Interview.objects.filter(start_time__year=self.year, start_time__month=self.month)
-        exams = Exam.objects.filter(start_time__year=self.year, start_time__month=self.month)
-        assignments = Assignment.objects.filter(due_by__year=self.year, due_by__month=self.month)
+        networking = Networking.objects.filter(start_time__year=self.year, 
+        start_time__month =self.month, user__id = self.user.id)
+        
+        interviews = Interview.objects.filter(start_time__year=self.year, 
+        start_time__month=self.month, user__id = self.user.id)
+        
+        exams = Exam.objects.filter(start_time__year=self.year, 
+        start_time__month=self.month, user__id = self.user.id)
+        
+        assignments = Assignment.objects.filter(due_by__year=self.year, 
+        due_by__month=self.month,user__id = self.user.id)
+        
         calendar_events = []
         
         for i in interviews:

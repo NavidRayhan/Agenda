@@ -23,6 +23,7 @@
     <br><br>    
     <div class="main-container">
         {% for item in tasks %}
+        {{user.CodingChallenge}}
             <div style="background-color: {{ item.color }} " class="task-item" id="coding-challenge">
                 {% if item.color == 'rgb(80, 5, 5)' %}<h6>#CC</h6>{% endif %}
                 {% if item.color == 'rgb(5, 129, 129)' %}<h6>#ASGNMNT</h6>{% endif %}

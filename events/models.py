@@ -1,7 +1,8 @@
 from django.db import models
-# Create your models here.
+from django.contrib.auth.models import User
 
 class Interview(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     company = models.CharField(max_length=50)
     location = models.CharField(max_length=50, default=None)
     online = models.BooleanField(default=False)
@@ -14,6 +15,7 @@ class Interview(models.Model):
 
 
 class Networking(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     company = models.CharField(max_length=50)
     location = models.CharField(max_length=50)
     roles = models.CharField(max_length=250, blank=True, null=True)

@@ -6,16 +6,12 @@ from django.http import HttpResponseRedirect, HttpResponse
 from .forms import AddCodingChallengeForm, AddAssignmentForm
 from datetime import timedelta, datetime
 from django.utils import timezone
-# Create your views here.
+from .utils import tasks, mergeSort
+from django.contrib.auth.models import User
 
-class tasks:
-    def __init__(self, model, color):
-        self.model = model
-        self.color = color
 
 class taskView(TemplateView):
 
-    
     model = CodingChallenge
     template_name = "Tasks/tasks.html"
     AddAssignmentForm = AddAssignmentForm
@@ -25,36 +21,45 @@ class taskView(TemplateView):
         now = timezone.now()
         context = super().get_context_data(**kwargs)
         context["tasks"] = []
-
-        for i in CodingChallenge.objects.all():
-            if now > i.due_by + timedelta(days=30):
-                i.delete() 
-            context["tasks"].append(tasks(model=i,color="rgb(80, 5, 5)"))
-        for i in Assignment.objects.all():
-            #if now > i.due_by + timedelta(days=30):
-            #    i.delete() 
-            context["tasks"].append(tasks(model=i,color="rgb(5, 129, 129)"))
-        for i in Exam.objects.all():
-            if now > i.start_time  + timedelta(days=30):
-                i.delete() 
-            context["tasks"].append(tasks(model=i,color="green"))
-        for i in Other.objects.all():
-            if now > i.due_by + timedelta(days=30):
-                i.delete() 
-            context["tasks"].append(tasks(model=i,color="red"))
+        if self.request.user.id == None:
+            for i in CodingChallenge.objects.filter(user__id=1):
+                context["tasks"].append(tasks(model=i,color="rgb(80, 5, 5)"))
+            
+            for i in Assignment.objects.filter(user__id=1):
+                context["tasks"].append(tasks(model=i,color="rgb(5, 129, 129)"))
+                
+            for i in Exam.objects.filter(user__id=1):
+                context["tasks"].append(tasks(model=i,color="green"))
+            
+            for i in Other.objects.filter(user__id=1):
+                context["tasks"].append(tasks(model=i,color="red"))
+        else:
+        #tasks will expire and auto delete after 30 days, all task models added to a master class 
+            for i in CodingChallenge.objects.filter(user__id=self.request.user.id):
+                if now > i.due_by + timedelta(days=30): i.delete() 
+                context["tasks"].append(tasks(model=i,color="rgb(80, 5, 5)"))
+            
+            for i in Assignment.objects.filter(user__id=self.request.user.id):
+                if now > i.due_by + timedelta(days=30): i.delete() 
+                context["tasks"].append(tasks(model=i,color="rgb(5, 129, 129)"))
+                
+            for i in Exam.objects.filter(user__id=self.request.user.id):
+                if now > i.start_time  + timedelta(days=30): i.delete() 
+                context["tasks"].append(tasks(model=i,color="green"))
+            
+            for i in Other.objects.filter(user__id=self.request.user.id):
+                if now > i.due_by + timedelta(days=30): i.delete() 
+                context["tasks"].append(tasks(model=i,color="red"))
+            
+        #sorting events by earliest 
+        mergeSort(context["tasks"])        
         
-        temp = []
-        for j in range(len(context["tasks"])-1):
-            for i in range(len(context["tasks"])-1):
-                if context["tasks"][i].model.due_by > context["tasks"][i+1].model.due_by:
-                    tempval = context["tasks"][i]
-                    context["tasks"][i] = context["tasks"][i+1]
-                    context["tasks"][i+1] = tempval
-
         return context
         
     def post(self, request, *args, **kwargs):
         
+        if self.request.user.id == None:
+            return HttpResponse("<script> window.confirm('You must log in to edit Tasks!'); window.location.href = '../tasks' </script>") 
         form = self.AddCodingChallengeForm(request.POST)
 
         #make record
@@ -64,11 +69,11 @@ class taskView(TemplateView):
             notes = form['notes'].value()
 
             try:
-                CodingChallenge.objects.all().filter(company=company, 
-                due_by__gte= due_by, due_by__lte=due_by+":59+00:00")[0].delete()
+                CodingChallenge.objects.all().filter(company=company, due_by__gte= due_by, 
+                due_by__lte=due_by+":59+00:00", user__id=request.user.id)[0].delete()
                 return HttpResponseRedirect(request.path)
             except:
-                a = CodingChallenge(company=company, due_by=due_by, notes=notes)
+                a = CodingChallenge(company=company, due_by=due_by, notes=notes, user=request.user)
                 a.save()
                 return HttpResponseRedirect(request.path)
         
@@ -81,11 +86,11 @@ class taskView(TemplateView):
             notes = form['notes'].value()
 
             try:
-                Assignment.objects.all().filter(name=name, 
-                due_by__gte= due_by, due_by__lte=due_by+":59+00:00")[0].delete()
+                Assignment.objects.all().filter(name=name, due_by__gte= due_by, 
+                due_by__lte=due_by+":59+00:00", user__id=request.user.id)[0].delete()
                 return HttpResponseRedirect(request.path)
             except:
-                a = Assignment(name=name, due_by=due_by, notes=notes)
+                a = Assignment(name=name, due_by=due_by, notes=notes, user=request.user)
                 a.save()
                 return HttpResponseRedirect(request.path)
         return HttpResponseRedirect(request.path)

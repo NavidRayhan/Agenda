@@ -2,9 +2,8 @@ body{
   background-color:rgb(226, 229, 231);
 }
 .calendar {
-    width: 98%;
+    width: 99%;
     margin: auto;
-    font-size: 13px;
     margin-top: 10px;
   }
   
@@ -24,7 +23,7 @@ body{
 }
 .calendar li{
     color:white;
-    padding-left: 2px;
+    padding-left: 3px;
     transition: transform 0.2s;
   }
 
@@ -32,26 +31,25 @@ body{
     padding: 10px;
     padding-bottom:0px;
     text-align: center;
-    font-size: 58px;
+    font-size: 40px;
     background-color:rgb(29, 51, 31);
     color:white;
     font-family: 'Times New Roman', Times, serif;
     font-weight: lighter;
     border-top: 3px solid white;
     border-left: 3px solid white;
-    /*color: rgb(15, 10, 63);*/
   }
   
   .calendar td {
-    width: 20px;
+    width: 2px;
     height: 15px;
     padding: 25px 0px 0px 5px;
     font-size: 10px;
   }
 
   .calendar li{
-    margin-left: -15%;
-    font-size: 18px;
+    margin-left: -12%;
+    font-size: 16px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif 
   }
   

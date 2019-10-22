@@ -5,6 +5,7 @@ from .models import Interview, Networking
 from .forms import InterviewForm, DeleteForm, NetworkingForm
 from django.http import HttpResponseRedirect, HttpResponse
 import datetime
+from django.contrib.auth.models import User
 
 class eventView(TemplateView):
     
@@ -16,15 +17,25 @@ class eventView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        print("DASDSA")
+        print(self.request.user.id)
+        print(User.objects.all())
+        try:
+            interviews = Interview.objects.filter(user=self.request.user)
+            context['interviews'] = interviews
+            networking = Networking.objects.filter(user=self.request.user)
+            context['networking'] = networking
         
-        interviews = Interview.objects.all()
-        context['interviews'] = interviews
-        networking = Networking.objects.all()
-        context['networking'] = networking
+        except:
+            interviews = Interview.objects.filter(user=User.objects.filter(id=1)[0])
+            context['interviews'] = interviews
+            networking = Networking.objects.filter(user=User.objects.filter(id=1)[0])
+            context['networking'] = networking
         return context
 
     def post(self, request, *args, **kwargs):
-    
+        if self.request.user.id == None:
+            return HttpResponse("<script>alert('You must login to edit Events!'); window.location.href = '../events'; </script>") 
         form = self.InterviewForm(request.POST)
         if form.is_valid():
             company = form['company'].value()
@@ -38,7 +49,8 @@ class eventView(TemplateView):
                     people=people,
                     start_time=start_time,
                     end_time = end_time,
-                    notes= notes)
+                    notes= notes,
+                    user= self.request.user)
             a.save()
             return HttpResponseRedirect(request.path) 
         else:
@@ -56,7 +68,8 @@ class eventView(TemplateView):
                         start_time=start_time,
                         end_time = end_time,
                         description= description,
-                        roles= roles)
+                        roles= roles,
+                        user= self.request.user)
                 a.save()
                 return HttpResponseRedirect(request.path) 
 
@@ -66,8 +79,8 @@ class eventView(TemplateView):
                     company= form['company'].value()
                     start_time = form['start_time'].value()
                     Interview.objects.all().filter(company=company, start_time__gte=start_time,
-                    start_time__lte=start_time+":59+00:00").delete()
+                    start_time__lte=start_time+":59+00:00", user=self.request.user).delete()
                     Networking.objects.all().filter(company=company, start_time__gte=start_time,
-                    start_time__lte=start_time+":59+00:00").delete()    
+                    start_time__lte=start_time+":59+00:00", user=self.request.user).delete()    
                     return HttpResponseRedirect(request.path)
             

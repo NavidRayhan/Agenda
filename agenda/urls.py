@@ -27,3 +27,6 @@ urlpatterns = [
     path('tasks/', include('Tasks.urls'))
 ]
 
+urlpatterns += [
+    path('', include('django.contrib.auth.urls')),
+]

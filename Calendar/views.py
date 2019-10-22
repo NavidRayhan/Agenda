@@ -8,7 +8,10 @@ from .models import *
 from .utils import Calendar
 
 class CalendarView(generic.ListView):
-    model = User
+    
+    def get_queryset(self):
+        pass
+
     template_name = 'Calendar/calendar.html'
 
     def get_context_data(self, **kwargs):
@@ -18,7 +21,7 @@ class CalendarView(generic.ListView):
         d = get_date(self.request.GET.get('day', None))
 
         # Instantiate our calendar class with today's year and date
-        cal = Calendar(d.year, d.month)
+        cal = Calendar(year=d.year, month=d.month, user=self.request.user)
 
         # Call the formatmonth method, which returns our calendar as a table
         html_cal = cal.formatmonth(withyear=True)
