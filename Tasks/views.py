@@ -13,7 +13,7 @@ from django.contrib.auth.models import User
 class taskView(TemplateView):
 
     model = CodingChallenge
-    template_name = "Tasks/tasks.html"
+    template_name = "tasks/tasks.html"
     AddAssignmentForm = AddAssignmentForm
     AddCodingChallengeForm = AddCodingChallengeForm
 
