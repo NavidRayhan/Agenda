@@ -23,12 +23,11 @@
     <br><br>    
     <div class="main-container">
         {% for item in tasks %}
-        {{user.CodingChallenge}}
             <div style="background-color: {{ item.color }} " class="task-item" id="coding-challenge">
-                {% if item.color == 'rgb(80, 5, 5)' %}<h6>#CC</h6>{% endif %}
-                {% if item.color == 'rgb(5, 129, 129)' %}<h6>#ASGNMNT</h6>{% endif %}
-                {% if item.color == 'red' %}<h6>#OTHER</h6>{% endif %}
-                <h1>{{item.model.company}}</h1>
+                {% if item.task_type == 'Coding Challenge' %}<h6>#CC</h6>{% endif %}
+                {% if item.task_type == 'Assignment' %}<h6>#ASN</h6>{% endif %}
+                {% if item.task_type == 'Exam' %}<h6>#EXAM</h6>{% endif %}
+                {% if item.task_type == 'Other' %}<h6>#EXAM</h6>{% endif %}
                 <h1>{{item.model.name}}</h1>
                 <h5>Due by: {{item.model.due_by}}</h5>
                 <h4><hr/>{{item.model.notes}}</h4>
@@ -45,16 +44,18 @@
                             {% csrf_token %}
                             <br>
                             Type: 
-                            <select id="task_select">
+                            <select name="task_type">
                                 <option>Coding Challenge</option>
                                 <option>Assignment</option>
+                                <option>Exam</option>
+                                <option>Other</option>
                             </select><br><br>
-                            Company/Name <input type="text" name="company" id="company_or_name">
+                            Company/Name <input type="text" name="name">
                             Due by: <input placeholder="[YYYY-MM-DD hh:mm:ss]" type="datetime" name="due_by">
                             Notes: <input type="text" name="notes" style="padding-bottom: 30px">
                     
                 </div>
-                <button style="margin-left:0px; border-radius:0%" onclick= "changeForm()" type="submit" value="Submit" class="btn btn-primary">Add Item</button>  
+                <button style="margin-left:0px; border-radius:0%" type="submit" value="Submit" class="btn btn-primary">Add Item</button>  
                 <button style="margin-left:0px; border-radius:0%" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </form>
             </div>
@@ -66,15 +67,9 @@
                 <div class="modal-content">
                     <form method="post" action="">
                         {% csrf_token %}
-                        Are you sure you want to delete ?     
-                        <br>
-                        Type: 
-                        <select id="del_select">
-                            <option>Coding Challenge</option>
-                            <option>Assignment</option>
-                        </select><br><br>       
+                        Are you sure you want to delete ?          
                         <br><b>Company/Name</b>
-                        <select id="company_or_name_del" name="company">
+                        <select name="name">
                             {% for item in tasks %}
                                 {% if item.model.company %}
                                 <option>{{item.model.company}}</option>
@@ -84,14 +79,14 @@
                                 {% endif %}
                             {% endfor %}
                         </select>
-                        <br><b>Start Time</b> 
+                        <br><b>Start Time/Due by</b> 
                         <select name="due_by">
                                 {% for item in tasks %}
                                     <option>{{ item.model.due_by|date:"Y-m-d G:i"  }}</option>
                                 {% endfor %}
                         </select>
                         <div class="modal-footer">
-                            <button onclick="changeForm2()" type="submit" value="Submit" class="btn btn-primary">Yes</button>  
+                            <button type="submit" value="Submit" class="btn btn-primary">Yes</button>  
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                         </div>
                     </form>

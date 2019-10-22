@@ -40,7 +40,7 @@ class Calendar(HTMLCalendar):
             elif event.color == 'rgb(80, 5, 5)':
                 d += (f'<a href="../tasks"><li style="background-color:{event.color};' +
                 f'margin-bottom:4px; list-style-type:none;">' + 
-                f'{event.model.company} @ {str(event.model.due_by)[-14:-9]} </li></a>')
+                f'{event.model.name} @ {str(event.model.due_by)[-14:-9]} </li></a>')
             
             elif event.color == 'black':
                 d += (f'<a href="../tasks"><li style="background-color:{event.color};' +
@@ -67,7 +67,7 @@ class Calendar(HTMLCalendar):
     def formatmonth(self, withyear=True):
         if self.user.id == None:
             self.user.id = 1 
-        coding_challenges = CodingChallenge.objects.filter(due_by__year=self.year, 
+        tasks = Task.objects.filter(due_by__year=self.year, 
         due_by__month=self.month, user__id = self.user.id)
         
         networking = Networking.objects.filter(start_time__year=self.year, 
@@ -76,24 +76,15 @@ class Calendar(HTMLCalendar):
         interviews = Interview.objects.filter(start_time__year=self.year, 
         start_time__month=self.month, user__id = self.user.id)
         
-        exams = Exam.objects.filter(start_time__year=self.year, 
-        start_time__month=self.month, user__id = self.user.id)
-        
-        assignments = Assignment.objects.filter(due_by__year=self.year, 
-        due_by__month=self.month,user__id = self.user.id)
-        
         calendar_events = []
         
         for i in interviews:
             calendar_events.append(CalendarObject(model=i, color='rgb(29, 51, 31)'))
         for i in networking:
             calendar_events.append(CalendarObject(model=i, color='rgb(14, 9, 58)'))
-        for i in coding_challenges:
-            calendar_events.append(CalendarObject(model=i, color="rgb(80, 5, 5)"))
-        for i in exams:
-            calendar_events.append(CalendarObject(model=i, color="black"))
-        for i in assignments:
-            calendar_events.append(CalendarObject(model=i, color="rgb(5, 129, 129)"))
+        for i in tasks:
+            task_types = {'Exam': 'red', 'Assignment': 'rgb(80, 5, 5)', 'Coding Challenge': '#590c47'}
+            calendar_events.append(CalendarObject(model=i, color=task_types[i.task_type]))
 
         cal = f'<table border="0" cellpadding="0" cellspacing="0" class="calendar">\n'
         cal += f'{self.formatmonthname(self.year, self.month, withyear=withyear)}\n'

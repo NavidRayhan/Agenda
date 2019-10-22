@@ -1,7 +1,9 @@
-class tasks:
-    def __init__(self, model, color):
+class TaskObject:
+    def __init__(self, model, task_type, color=None ):
         self.model = model
-        self.color = color
+        self.task_type = task_type
+        task_types = {'Exam': 'red', 'Assignment': 'rgb(80, 5, 5)', 'Coding Challenge': '#590c47'}
+        self.color = task_types[task_type]
 
 def mergeSort(arr): 
     if len(arr) >1: 

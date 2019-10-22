@@ -1,14 +1,9 @@
 from django import forms
-from .models import CodingChallenge, Assignment
+from .models import Task
 
-class AddCodingChallengeForm(forms.ModelForm):
-
-    class Meta:
-        model = CodingChallenge
-        fields = ('company','due_by','notes')
-
-class AddAssignmentForm(forms.ModelForm):
+class AddTaskForm(forms.ModelForm):
 
     class Meta:
-        model=  Assignment
-        fields = ('name', 'due_by', 'notes')
+        model = Task
+        fields = ('task_type','name','due_by','notes')
+
