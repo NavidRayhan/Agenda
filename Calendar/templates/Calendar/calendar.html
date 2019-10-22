@@ -5,6 +5,16 @@
 <head>
         <link rel="stylesheet" type="text/css" href="../../static/Calendar/css/Calendar.css">
 </head>
+<form method="post" action="">
+                {% csrf_token %}
+                <br>
+                Add Google Calendar Integration?
+                <select name="yes_no">
+                    <option>Yes</option>
+                    <option>No</option>
+                </select>
+    <button style="padding: 3px; font-size: 10px" type="submit" value="Submit" class="btn btn-primary">Submit</button>  
+    </form>
 {{ calendar }}
 {% endblock %}
 

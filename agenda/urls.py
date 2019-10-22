@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
+from django.conf.urls import url
+from .views import signup
 
 app_name = "agenda"
 
@@ -25,6 +27,7 @@ urlpatterns = [
     path('events/', include('events.urls')),
     path('', include('Calendar.urls')),
     #path('', include('Classes.urls')),
+    url(r'^signup/$', signup, name='signup'),
 ]
 
 urlpatterns += [

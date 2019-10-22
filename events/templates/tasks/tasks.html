@@ -27,7 +27,7 @@
                 {% if item.task_type == 'Coding Challenge' %}<h6>#CC</h6>{% endif %}
                 {% if item.task_type == 'Assignment' %}<h6>#ASN</h6>{% endif %}
                 {% if item.task_type == 'Exam' %}<h6>#EXAM</h6>{% endif %}
-                {% if item.task_type == 'Other' %}<h6>#EXAM</h6>{% endif %}
+                {% if item.task_type == 'Other' %}<h6>#OTHER</h6>{% endif %}
                 <h1>{{item.model.name}}</h1>
                 <h5>Due by: {{item.model.due_by}}</h5>
                 <h4><hr/>{{item.model.notes}}</h4>

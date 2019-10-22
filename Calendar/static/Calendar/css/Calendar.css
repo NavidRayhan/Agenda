@@ -1,6 +1,10 @@
 body{
   background-color:rgb(226, 229, 231);
 }
+
+form{
+  margin-left: 40px;
+}
 .calendar {
     width: 99%;
     margin: auto;
