@@ -33,40 +33,6 @@ body{
     color: black;
 }
 
-@media(max-width: 576px){
-    .single-category {
-        width: 94%;
-        margin-bottom: 10px;
-    }
-    .all-events {
-        display: flex;
-        flex-direction: column;
-        margin-left: -3.5px;
-    }
-    .title{
-        font-size: 30px;
-    }
-    .single-event h1,h2,h3,h4,h5,h6,a,li{
-        padding-left: 1%;
-        font-size:12px;
-    }
-    #notes {
-        font-size: 13px
-    }
-}
-@media(max-width: 770px){
-    .title{
-        font-size: 30px;
-    }
-    .single-category .single-event button{
-        margin-left:-10px;
-    }
-    .single-event h1,h2,h3,h4,h5,h6,a,li{
-        padding-left: 1%;
-        font-size:12px;
-    }
-}
-
 .single-category h1 {
     text-align: center;
     
@@ -76,7 +42,7 @@ body{
     margin:15px;
     border: 1px solid white;
     color:white;
-    padding-top: 20px;
+    padding-top: 30px;
     opacity:0;
     transition: 2000ms opacity;
 }
@@ -158,4 +124,38 @@ form input, form select {
     background-color:rgb(230, 244, 248);
     font-family: 'Trebuchet MS';
     padding: 2px;
+}
+
+@media(max-width: 576px){
+    .single-category {
+        width: 94%;
+        margin-bottom: 10px;
+    }
+    .all-events {
+        display: flex;
+        flex-direction: column;
+        margin-left: -3.5px;
+    }
+    .title{
+        font-size: 30px;
+    }
+    .single-event h1,h2,h3,h4,h5,h6,a,li{
+        padding-left: 1%;
+        font-size:12px;
+    }
+    #notes {
+        font-size: 13px
+    }
+}
+@media(max-width: 770px){
+    .title{
+        font-size: 30px;
+    }
+    .single-category .single-event button{
+        margin-left:-10px;
+    }
+    .single-event h1,h2,h3,h4,h5,h6,a,li{
+        padding-left: 1%;
+        font-size:12px;
+    }
 }
