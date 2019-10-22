@@ -61,33 +61,38 @@ class taskView(TemplateView):
         if self.request.user.id == None:
             return HttpResponse("<script> window.confirm('You must log in to edit Tasks!'); window.location.href = '../tasks' </script>") 
         
-        #make record
+        #delete record
         try:
             form = self.AddCodingChallengeForm(request.POST)
-            company = form['company'].value()
-            print("DSDSD")
-            print(company)
-            due_by = form['due_by'].value()
+            company = form['company'].value().strip()
+            due_by = form['due_by'].value().strip()
+            if len(CodingChallenge.objects.all().filter(company=company, due_by__gte= due_by, 
+            due_by__lte=due_by+":59+00:00", user__id=request.user.id)) == 0:
+                None.strip()
             CodingChallenge.objects.all().filter(company=company, due_by__gte= due_by, 
-            due_by__lte=due_by+":59+00:00", user__id=request.user.id)[0].delete()
+            due_by__lte=due_by+":59+00:00", user__id=request.user.id).delete()
             return HttpResponseRedirect(request.path)
         except:
             pass
 
         try:
-            form = self.AddAssignmentForm(request.POST)
-            name = form['name'].value()
-            due_by = form['due_by'].value()
+            form = form = self.AddAssignmentForm(request.POST)
+            name = form['name'].value().strip()
+            due_by = form['due_by'].value().strip()
+            if len(Assignment.objects.all().filter(name=name, due_by__gte= due_by, 
+            due_by__lte=due_by+":59+00:00", user__id=request.user.id)) == 0:
+                None.strip()
             Assignment.objects.all().filter(name=name, due_by__gte= due_by, 
-            due_by__lte=due_by+":59+00:00", user__id=request.user.id)[0].delete()
+            due_by__lte=due_by+":59+00:00", user__id=request.user.id).delete()
             return HttpResponseRedirect(request.path)
         except:
             pass
-        
+
+            
         form = self.AddCodingChallengeForm(request.POST)
         if form.is_valid():
-            company = form['company'].value()
-            due_by = form['due_by'].value()
+            company = form['company'].value().strip()
+            due_by = form['due_by'].value().strip()
             notes = form['notes'].value()
             a = CodingChallenge(company=company, due_by=due_by, notes=notes, user=request.user)
             a.save()
@@ -95,8 +100,8 @@ class taskView(TemplateView):
         
         form = self.AddAssignmentForm(request.POST)        
         if form.is_valid():
-            name = form['name'].value()
-            due_by = form['due_by'].value()
+            name = form['name'].value().strip()
+            due_by = form['due_by'].value().strip()
             notes = form['notes'].value()
             a = Assignment(name=name, due_by=due_by, notes=notes, user=request.user)
             a.save()
