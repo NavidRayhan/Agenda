@@ -11,7 +11,8 @@ SCOPES = ['https://www.googleapis.com/auth/calendar.events']
 
 def get_events(user):
     creds = None
-    path = os.path.abspath('client_secret_911162810929-uqip30ve11i4c2fl3jk6dpqu0gpenm81.apps.googleusercontent.com.json')
+    path = os.path.abspath('credentials.json')
+    #path = os.path.abspath('client_secret_911162810929-uqip30ve11i4c2fl3jk6dpqu0gpenm81.apps.googleusercontent.com.json')
     # The file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
     # time.
