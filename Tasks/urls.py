@@ -4,6 +4,5 @@ from . import views
 app_name = "Tasks"
 
 urlpatterns = [
-    path('', views.taskView.as_view(), name='task'),
-    #path('/CodingChallenges', )
+    path('', views.taskView.as_view(), name='task')
 ]
