@@ -25,7 +25,7 @@ SECRET_KEY = 'c1*%i7ekh+3ikg=!i#+r-w0zasr-1!24oq)j)m!_2byc4rp5^o'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://limitless-stream-54885.herokuapp.com/']
 
 
 # Application definition
