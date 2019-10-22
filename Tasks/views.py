@@ -65,6 +65,8 @@ class taskView(TemplateView):
         try:
             form = self.AddCodingChallengeForm(request.POST)
             company = form['company'].value()
+            print("DSDSD")
+            print(company)
             due_by = form['due_by'].value()
             CodingChallenge.objects.all().filter(company=company, due_by__gte= due_by, 
             due_by__lte=due_by+":59+00:00", user__id=request.user.id)[0].delete()
