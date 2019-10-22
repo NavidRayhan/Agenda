@@ -84,3 +84,4 @@ class eventView(TemplateView):
                     start_time__lte=start_time+":59+00:00", user=self.request.user).delete()    
                     return HttpResponseRedirect(request.path)
             
+            return HttpResponseRedirect(request.path)    
