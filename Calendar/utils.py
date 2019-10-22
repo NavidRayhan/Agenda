@@ -42,11 +42,6 @@ class Calendar(HTMLCalendar):
                 f'margin-bottom:4px; list-style-type:none;">' + 
                 f'{event.model.name} @ {str(event.model.due_by)[-14:-9]} </li></a>')
             
-            elif event.color == 'black':
-                d += (f'<a href="../tasks"><li style="background-color:{event.color};' +
-                f'margin-bottom:4px; list-style-type:none;">' +
-                f'{event.model.name} @ {str(event.model.start_time)[-14:-9]} </li></a>')
-            
             else:
                 d += (f'<a href="../tasks"><li style="background-color:{event.color};' +
                 f'margin-bottom:4px; list-style-type:none;">'+
