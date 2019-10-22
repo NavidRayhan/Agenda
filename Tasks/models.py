@@ -20,7 +20,7 @@ class CodingChallenge(models.Model):
     company = models.CharField(max_length=50)
     due_by = models.DateTimeField()
     completed_status = models.BooleanField(default=False)
-    notes = models.TextField()
+    notes = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return "{0} due by: {1}".format(self.company, self.due_by)
