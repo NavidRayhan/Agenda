@@ -11,11 +11,13 @@ SCOPES = ['https://www.googleapis.com/auth/calendar.events']
 
 def get_events(user):
     creds = None
-    path = os.path.abspath('credentials.json')
-    path = os.path.abspath('client_secret_911162810929-pev52f68vgov9h4sk4iapota327j8ua7.apps.googleusercontent.com.json')
+    path = os.path.abspath('client_secret_911162810929-uqip30ve11i4c2fl3jk6dpqu0gpenm81.apps.googleusercontent.com')
     # The file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
     # time.
+    if os.path.exists('token.pickle'):
+        with open('token.pickle', 'rb') as token:
+            creds = pickle.load(token)
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
