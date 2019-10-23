@@ -27,9 +27,9 @@ class eventView(TemplateView):
             context['networking'] = networking
         
         except:
-            interviews = Interview.objects.filter(user=User.objects.filter(id=1)[0])
+            interviews = Interview.objects.filter(user=User.objects.filter(id=2)[0])
             context['interviews'] = interviews
-            networking = Networking.objects.filter(user=User.objects.filter(id=1)[0])
+            networking = Networking.objects.filter(user=User.objects.filter(id=2)[0])
             context['networking'] = networking
         return context
 

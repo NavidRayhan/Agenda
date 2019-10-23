@@ -21,7 +21,7 @@ class taskView(TemplateView):
         context = super().get_context_data(**kwargs)
         context["tasks"] = []
         if self.request.user.id == None:
-            for i in Task.objects.filter(user__id=1):
+            for i in Task.objects.filter(user__id=2):
                 context["tasks"].append(TaskObject(model=i,task_type=i.task_type))
         else:
         #tasks will expire and auto delete after 30 days, all task models added to a master class 

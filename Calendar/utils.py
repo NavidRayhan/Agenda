@@ -61,7 +61,7 @@ class Calendar(HTMLCalendar):
 	# filter events by year and month
     def formatmonth(self, withyear=True):
         if self.user.id == None:
-            self.user.id = 1 
+            self.user.id = 2 
         tasks = Task.objects.filter(due_by__year=self.year, 
         due_by__month=self.month, user__id = self.user.id)
         
