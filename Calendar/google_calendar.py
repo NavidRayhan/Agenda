@@ -19,7 +19,7 @@ def get_events(user):
         if os.path.exists('token_navid.pickle'):
             with open('token_navid.pickle', 'rb') as token:
                 creds = pickle.load(token)
-    # If there are no (valid) credentials available, let the user log in.
+    #  If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
