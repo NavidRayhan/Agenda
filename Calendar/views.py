@@ -32,6 +32,9 @@ class CalendarView(generic.ListView):
         if form.is_valid():
             choice = form['yes_no'].value()
             if choice == 'Yes':
+                if self.request.user.id == None:
+                    return HttpResponse("<script> window.confirm('You must log in to connect to your Google Calendar!');"+
+                    "window.location.href = '../tasks' </script>") 
                 get_events(request.user)
                 return HttpResponseRedirect('../calendar')
             if choice == 'No':
