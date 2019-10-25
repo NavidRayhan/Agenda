@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls import url
+from django.shortcuts import redirect
 from .views import signup
 
 app_name = "agenda"
@@ -26,8 +27,10 @@ urlpatterns = [
     path('tasks/', include('Tasks.urls')),
     path('events/', include('events.urls')),
     path('', include('Calendar.urls')),
+    path('', lambda request: redirect('calendar/', permanent=False)),
     #path('', include('Classes.urls')),
     url(r'^signup/$', signup, name='signup'),
+
 ]
 
 urlpatterns += [

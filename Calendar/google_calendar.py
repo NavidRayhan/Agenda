@@ -51,8 +51,12 @@ def get_events(user):
                                 start_time  =event['start']['dateTime'])) == 0):
             
             people = ""
-            for i in event['attendees']:
-              people += event['attendees'][i] + ", "
+            print("HIHII")
+            print(event['attendees'])
+            for i in event['attendees'][0]:
+              if i=='email' and event['attendees'][0]['self'] != True:
+                print("YEEEE")
+                people += event['attendees'][0][i] + ", "
             a = Interview(
               user=user, 
               company=event['summary'], 
