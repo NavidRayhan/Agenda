@@ -6,6 +6,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from django.http import HttpResponseRedirect
 from Tasks.models import Task
+from events.models import Interview
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/calendar.events']
 
@@ -43,12 +44,18 @@ def get_events(user):
     for event in events:
         start = event['start'].get('dateTime', event['start'].get('date'))
         print(start, event['summary'])
-        if (len(Task.objects.filter(user=user ,
-                                task_type= "Other", 
-                                name=event['summary'], 
+        if (len(Interview.objects.filter(user=user , 
+                                company=event['summary'], 
+                                location=event['location'],
                                 notes=event['description'], 
                                 due_by=event['start']['dateTime'])) == 0):
-            a = Task(user=user ,task_type= "Other", name=event['summary'], notes=event['description'], due_by=event['start']['dateTime'])
+            a = Interview(
+              user=user, 
+              company=event['summary'], 
+              location=event['location'],
+              notes=event['description'],
+              due_by=event['start']['dateTime']
+              )
             a.save()
 
 
