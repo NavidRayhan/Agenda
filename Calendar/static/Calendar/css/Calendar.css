@@ -3,7 +3,17 @@ body{
 }
 
 form{
-  margin-left: 40px;
+  margin-left: 1.6%;
+}
+
+i{
+  margin-left: 0.8%;
+  font-size: 40px;
+  color :rgb(29, 51, 31);
+}
+
+i:hover{
+  transform:scale(1.2)
 }
 .calendar {
     width: 99%;

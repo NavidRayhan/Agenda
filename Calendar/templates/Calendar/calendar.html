@@ -14,7 +14,10 @@
                     <option>No</option>
                 </select>
     <button style="padding: 3px; font-size: 10px" type="submit" value="Submit" class="btn btn-primary">Submit</button>  
-    </form>
+</form>
+
+<i onclick="window.location = '{{prev_month}}'" class="fas fa-arrow-circle-left"></i>
+<i onclick="window.location = '{{next_month}}'" class="fas fa-arrow-circle-right"></i>
 {{ calendar }}
 {% endblock %}
 

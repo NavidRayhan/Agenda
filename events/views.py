@@ -17,9 +17,6 @@ class eventView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        print("DASDSA")
-        print(self.request.user.id)
-        print(User.objects.all())
         try:
             interviews = Interview.objects.filter(user=self.request.user)
             context['interviews'] = interviews
