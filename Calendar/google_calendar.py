@@ -48,13 +48,19 @@ def get_events(user):
                                 company=event['summary'], 
                                 location=event['location'],
                                 notes=event['description'], 
-                                due_by=event['start']['dateTime'])) == 0):
+                                start_time  =event['start']['dateTime'])) == 0):
+            
+            people = ""
+            for i in event['attendees']:
+              people += event['attendees'][i] + ", "
             a = Interview(
               user=user, 
               company=event['summary'], 
               location=event['location'],
               notes=event['description'],
-              due_by=event['start']['dateTime']
+              start_time=event['start']['dateTime'],
+              end_time= event['end']['dateTime'],
+              people=people
               )
             a.save()
 
